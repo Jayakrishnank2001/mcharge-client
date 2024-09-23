@@ -1,0 +1,14 @@
+<mat-card class="custom-card">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <p class="mb-0"><strong>{{ activeCount }}</strong> Active</p>
+        <p class="mb-0"><strong>{{ inactiveCount }}</strong> Inactive</p>
+      </div>
+      <div class="icon-wrapper" [style.background-color]="iconBackgroundColor">
+        <img [src]="icon" alt="Icon" class="icon">
+      </div>
+    </div>
+    <div class="text-center">
+      <p><strong>{{ total }}</strong> {{ title }}</p>
+    </div>
+</mat-card>

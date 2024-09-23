@@ -1,0 +1,43 @@
+.navbar-custom {
+    background-color: #006a47;
+    height: auto;
+}
+
+.navbar-brand img {
+    max-width: 176px;
+    height: 28px;
+}
+
+.navbar-nav .navbar-nav-active {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.user-section img {
+    height: 32px;
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.nav-item img {
+    width: 15px;
+    height: 15px;
+}
+
+.nav-link {
+    color: white;
+    display: flex;
+    align-items: center;  
+}
+
+.icon-wrapper {
+    background-color: white;
+  border-radius: 5px;
+  width: 27px;
+  height: 27px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,12 @@
+.container-fluid{
+    background-color: #f2f2f2;
+    height: 100vh; 
+    overflow: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+  }
+
+  p{
+    font-size:larger;
+    font-weight: 700;
+  }

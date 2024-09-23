@@ -1,0 +1,41 @@
+th{
+    background-color: #222222b8;
+    color: white;
+    font-weight: 400;
+    font-size: 90%;
+}
+
+table{
+    border-radius: 10px;
+}
+
+mat-icon{
+    cursor: pointer;
+    color: #222222b8;
+    font-size:xx-large;
+    font-weight: 600;
+}
+
+.search-container{
+    margin-top: -40px;
+}
+
+table{
+    border-radius: 2em;
+}
+
+mat-paginator{
+    background-color: #f2f2f2;
+    color: black;
+}
+
+.search-btn{
+    background-color: rgb(0, 76, 151);
+    color: white;
+}
+
+.reset-btn{
+    background-color: rgb(191, 28, 23);
+    color: white;
+}
+  

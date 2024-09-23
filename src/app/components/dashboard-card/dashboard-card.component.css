@@ -1,0 +1,21 @@
+.custom-card {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 280px;
+    height:160px;
+  }
+  
+  .icon-wrapper {
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+  

@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <p class="ms-1 mt-3">Dashboard</p>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+      <div class="col" *ngFor="let card of cards">
+        <app-dashboard-card [icon]="card.icon" [title]="card.title" [activeCount]="card.activeCount"
+          [inactiveCount]="card.inactiveCount" [total]="card.total" [iconBackgroundColor]="card.iconBackgroundColor">
+        </app-dashboard-card>
+      </div>
+    </div>
+  
+    <p class="mt-5 ms-2">Monthly Details</p>
+  
+    <div class="row mt-3">
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Monthly Sales</h5>
+            <canvas #lineChart></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Product Categories</h5>
+            <canvas #barChart></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-4">
+        <app-pie-chart [chartData]="stationChartData" [chartOptions]="chartOptions"
+          chartTitle="Station Details"></app-pie-chart>
+      </div>
+  
+      <div class="col-md-4">
+        <app-pie-chart [chartData]="unitConsumedChartData" [chartOptions]="chartOptions"
+          chartTitle="Unit Consumed Details"></app-pie-chart>
+      </div>
+  
+      <div class="col-md-4">
+        <app-pie-chart [chartData]="chargerChartData" [chartOptions]="chartOptions"
+          chartTitle="Charger Details"></app-pie-chart>
+      </div>
+    </div>
+  
+  </div>
