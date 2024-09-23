@@ -1,7 +1,12 @@
 import { HttpInterceptorFn } from '@angular/common/http';
+import { inject, PLATFORM_ID } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = localStorage.getItem('Token');
+  const authService = inject(AuthService);
+  const platformId = inject(PLATFORM_ID);
+
+  const token = authService.getToken('token');
 
   const body = typeof req.body === 'object' && req.body !== null ? req.body : {};
 
