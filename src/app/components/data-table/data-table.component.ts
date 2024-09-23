@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material/material.module';
@@ -11,7 +11,7 @@ import { PageEvent } from '@angular/material/paginator';
   templateUrl: './data-table.component.html',
   styleUrl: './data-table.component.css'
 })
-export class DataTableComponent {
+export class DataTableComponent implements OnChanges{
 
   @Input() data: any[] = [];
   @Input() columns: string[] = [];
@@ -28,6 +28,12 @@ export class DataTableComponent {
 
   customers: string[] = ['Customer 1', 'Customer 2', 'Customer 3'];
   paymentTypes: string[] = ['Credit Card', 'PayPal', 'Bank Transfer'];
+
+  constructor(private cdr: ChangeDetectorRef) { }
+  
+  ngOnChanges() {
+    this.cdr.detectChanges();
+  }
 
   filteredData() {
     if (!this.searchTerm) return this.data;
@@ -59,6 +65,17 @@ export class DataTableComponent {
     this.pageIndex = event.pageIndex;
     this.applyFilters(); 
   }
+
+  columnMap: { [key: string]: string } = {
+    'S.No': 'sno',
+    'Customer Name': 'customer_name',
+    'Station Name': 'station_name',
+    'Booking Status': 'booking_status_name',
+    'Duration': 'duration',
+    'Parking Type': 'parking_type_name',
+    'Amount (Rs.)': 'total_amount'
+  };
+  
 
 
 }

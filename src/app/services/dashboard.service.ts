@@ -13,17 +13,12 @@ export class DashboardService {
 
   constructor(private readonly _http: HttpClient) { }
 
-  ownerCount(token: string): Observable<any> {
-    // Set headers to 'application/x-www-form-urlencoded'
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    });
+  ownerCount(): Observable<any> {
+    return this._http.post<any>(`${this.baseURL}/owner_count`,{});
+  }
 
-    // Prepare the body as a URL-encoded string
-    const body = `token=${encodeURIComponent(token)}`;
-
-    // Make the POST request
-    return this._http.post<any>(`${this.baseURL}/owner_count`, body, { headers });
+  stationCount(): Observable<any> {
+    return this._http.post<any>(`${this.baseURL}/station_count`,{});
   }
 
 }

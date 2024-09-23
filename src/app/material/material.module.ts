@@ -9,6 +9,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from "@angular/material/select";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 const MaterialComponents = [
     MatFormFieldModule,
@@ -20,7 +23,9 @@ const MaterialComponents = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatPaginatorModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatMenuModule
 ]
 
 @NgModule({

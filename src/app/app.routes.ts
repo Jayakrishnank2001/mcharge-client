@@ -5,6 +5,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ReportComponent } from './pages/report/report.component';
+import { OtpComponent } from './pages/otp/otp.component';
 
 export const routes: Routes = [
     {
@@ -22,6 +23,10 @@ export const routes: Routes = [
         component: SignupComponent
     },
     {
+        path:'otp',
+        component:OtpComponent
+    },
+    {
         path: '',
         component: HeaderComponent,
         canActivate: [AuthGuard],
@@ -29,10 +34,12 @@ export const routes: Routes = [
             {
                 path: 'dashboard',
                 component: DashboardComponent,
+                canActivate: [AuthGuard],
             },
             {
                 path: 'report',
-                component: ReportComponent
+                component: ReportComponent,
+                canActivate: [AuthGuard]
             }
         ]
     }

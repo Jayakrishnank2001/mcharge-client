@@ -67,11 +67,24 @@
                     </a>
                 </li>
             </ul>
-            <div class="user-section d-flex align-items-center">
+            <div class="user-section d-flex align-items-center" [matMenuTriggerFor]="userMenu">
                 <img src="../../../assets/images/avatar-design.0263654e73080ac2c406.png" alt="User Logo"
                     class="rounded-circle me-2">
                 <span class="text-white">demo_user</span>
             </div>
+
+            <mat-menu #userMenu="matMenu">
+                <button mat-menu-item routerLink="/profile">
+                    <span>Profile</span>
+                </button>
+                <button mat-menu-item routerLink="/change-password">
+                    <span>Change Password</span>
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <span>Logout</span>
+                </button>
+            </mat-menu>
+
         </div>
     </div>
 </nav>

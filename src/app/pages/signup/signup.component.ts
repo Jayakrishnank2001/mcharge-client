@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from '../../material/material.module';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { validateByTrimming } from '../../helpers/validations';
+import { emailValidators, mobileValidators } from '../../shared/validators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -17,13 +20,15 @@ export class SignupComponent implements OnInit {
   isPasswordVisible = false;
 
   constructor(private _fb: FormBuilder,
-    private _authService: AuthService) { }
+    private _authService: AuthService,
+    private _router: Router,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.signupForm = this._fb.group({
-      userName: [''],
-      email: ['', [Validators.required]],
-      phone: [''],
+      userName: ['',[Validators.required]],
+      email: ['', [validateByTrimming(emailValidators)]],
+      phone: ['',[validateByTrimming(mobileValidators)]],
       password: ['', [Validators.required]]
     })
   }
@@ -31,18 +36,17 @@ export class SignupComponent implements OnInit {
   onSubmit(): void {
     if (this.signupForm.valid) {
       const formData = this.signupForm.getRawValue()
-      // formData.append('name', ''); // Assuming you're sending an empty string
-      // formData.append('userName', this.signupForm.get('userName')?.value);
-      // formData.append('email', this.signupForm.get('email')?.value);
-      // formData.append('phone', ''); // Assuming you're sending an empty string
-      // formData.append('address', ''); // Assuming you're sending an empty string
-      // formData.append('location', ''); // Assuming you're sending an empty string
-      // formData.append('pincode', ''); // Assuming you're sending an empty string
-      // formData.append('profile_image', ''); // Assuming no file is chosen
-      // formData.append('password', this.signupForm.get('password')?.value);
       this._authService.userSignup(formData).subscribe({
         next: (res) => {
-          console.log(res)
+          if (res.status === 1) {
+            this._router.navigate(['/otp'])
+            localStorage.setItem('resetKey',res.reset_key)
+          } else {
+            this._snackBar.open(res.msg, 'Close', {
+              duration: 5000,
+              verticalPosition: 'top',
+            });
+          }
         }
       })
     }

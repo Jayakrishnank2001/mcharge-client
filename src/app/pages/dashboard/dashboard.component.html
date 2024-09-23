@@ -1,9 +1,11 @@
+<app-spinner [loadingTime]="1500"></app-spinner>
+
 <div class="container-fluid">
     <p class="ms-1 mt-3">Dashboard</p>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
       <div class="col" *ngFor="let card of cards">
-        <app-dashboard-card [icon]="card.icon" [title]="card.title" [activeCount]="card.activeCount"
-          [inactiveCount]="card.inactiveCount" [total]="card.total" [iconBackgroundColor]="card.iconBackgroundColor">
+        <app-dashboard-card [icon]="card.icon" [title]="card.title" [Active]="card.Active"
+          [Inactive]="card.Inactive" [total]="card.total" [iconBackgroundColor]="card.iconBackgroundColor">
         </app-dashboard-card>
       </div>
     </div>

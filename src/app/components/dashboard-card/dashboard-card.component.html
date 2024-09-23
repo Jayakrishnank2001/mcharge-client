@@ -1,14 +1,23 @@
 <mat-card class="custom-card">
-    <div class="d-flex justify-content-between align-items-center">
-      <div>
-        <p class="mb-0"><strong>{{ activeCount }}</strong> Active</p>
-        <p class="mb-0"><strong>{{ inactiveCount }}</strong> Inactive</p>
-      </div>
-      <div class="icon-wrapper" [style.background-color]="iconBackgroundColor">
+  <div class="row">
+    <div class="col-6 text-left">
+      <p class="mb-0"><strong>{{ Active }}</strong></p>
+      <p class="mb-0"><strong>Active</strong></p>
+    </div>
+    <div class="col-6 text-right">
+      <p class="mb-0"><strong>{{ Inactive }}</strong></p>
+      <p class="mb-0"><strong>Inactive</strong></p>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-6 text-left">
+      <div class="icon-wrapper ms-4" [style.background-color]="iconBackgroundColor">
         <img [src]="icon" alt="Icon" class="icon">
       </div>
     </div>
-    <div class="text-center">
-      <p><strong>{{ total }}</strong> {{ title }}</p>
+    <div class="col-6 text-right">
+      <p class="mb-0"><strong>{{ total }}</strong></p>
+      <p class="mb-0"><strong>{{ title }}</strong></p>
     </div>
+  </div>
 </mat-card>

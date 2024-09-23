@@ -41,3 +41,11 @@
   align-items: center;
   justify-content: center;
 }
+
+.user-section {
+    cursor: pointer;
+}
+
+.mat-menu-panel {
+    min-width: 150px;
+}

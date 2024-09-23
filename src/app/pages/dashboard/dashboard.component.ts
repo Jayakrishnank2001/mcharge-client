@@ -1,38 +1,71 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { MaterialModule } from '../../material/material.module';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { DashboardCardComponent } from '../../components/dashboard-card/dashboard-card.component';
 import Chart, { ChartConfiguration, ChartData } from 'chart.js/auto';
-import { Inject, PLATFORM_ID } from '@angular/core';
 import { PieChartComponent } from '../../components/pie-chart/pie-chart.component';
+import { OwnerCount, StationCount } from '../../models/model';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MaterialModule, DashboardCardComponent, CommonModule, PieChartComponent],
+  imports: [MaterialModule, DashboardCardComponent, CommonModule, PieChartComponent, SpinnerComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements AfterViewInit, OnInit {
 
   @ViewChild('lineChart') lineChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('barChart') barChartRef!: ElementRef<HTMLCanvasElement>;
 
-  cards = [
-    { icon: '../../../assets/images/card1-img.png', title: 'Users', activeCount: 100, inactiveCount: 20, total: '120', iconBackgroundColor: '#328cd1' },
-    { icon: '../../../assets/images/card2-img.png', title: 'Orders', activeCount: 50, inactiveCount: 10, total: '60', iconBackgroundColor: '#d18c32' },
-    { icon: '../../../assets/images/card3-img.png', title: 'Products', activeCount: 200, inactiveCount: 30, total: '230', iconBackgroundColor: '#8c32d1' },
-    { icon: '../../../assets/images/card4-img.png', title: 'Deliveries', activeCount: 30, inactiveCount: 5, total: '35', iconBackgroundColor: '#2ab95a' },
-    { icon: '../../../assets/images/card5-img.png', title: 'Revenue', activeCount: 1000, inactiveCount: 0, total: '1000', iconBackgroundColor: '#d1d132' },
-    { icon: '../../../assets/images/card6-img.png', title: 'Users', activeCount: 100, inactiveCount: 20, total: '120', iconBackgroundColor: '#d13250' },
-  ];
+  ownerCount: OwnerCount[] = []
+  stationCount: StationCount[] = []
+  // chargerCount
+  cards: any[] = []
+
+  loadData() {
+    setTimeout(() => {
+      this.cards = [
+        { icon: '../../../assets/images/card1-img.png', title: 'Total Owners', Active: this.ownerCount[0]?.value, Inactive: this.ownerCount[1]?.value, total: this.ownerCount[0]?.value+this.ownerCount[1]?.value, iconBackgroundColor: '#328cd1' },
+        { icon: '../../../assets/images/card2-img.png', title: 'Total Station', Active: this.stationCount[0]?.value, Inactive: this.stationCount[1]?.value, total:  this.stationCount[0]?.value+ this.stationCount[1]?.value, iconBackgroundColor: '#d18c32' },
+        { icon: '../../../assets/images/card3-img.png', title: 'Products', Active: 200, Inactive: 30, total: '230', iconBackgroundColor: '#8c32d1' },
+        { icon: '../../../assets/images/card4-img.png', title: 'Deliveries', Active: 30, Inactive: 5, total: '35', iconBackgroundColor: '#2ab95a' },
+        { icon: '../../../assets/images/card5-img.png', title: 'Revenue', Active: 1000, Inactive: 0, total: '1000', iconBackgroundColor: '#d1d132' },
+        { icon: '../../../assets/images/card6-img.png', title: 'Users', Active: 100, Inactive: 20, total: '120', iconBackgroundColor: '#d13250' },
+      ];
+    }, 1000)
+  }
+
 
   constructor(private _dashboardService: DashboardService) { }
 
+  ngOnInit(): void {
+    this.getOwnersCount()
+    this.getStationCount()
+    this.loadData()
+  }
+
   ngAfterViewInit(): void {
-      this.createLineChart();
-      this.createPieChart();
+    this.createLineChart();
+    this.createPieChart();
+  }
+
+  getOwnersCount() {
+    this._dashboardService.ownerCount().subscribe({
+      next: (res) => {
+        this.ownerCount = res.data
+      }
+    })
+  }
+
+  getStationCount() {
+    this._dashboardService.stationCount().subscribe({
+      next: (res) => {
+        this.stationCount=res.data
+      }
+    })
   }
 
   createLineChart() {

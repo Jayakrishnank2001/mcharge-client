@@ -11,8 +11,8 @@ import { MaterialModule } from '../../material/material.module';
 export class DashboardCardComponent {
   @Input() icon: string = '';
   @Input() title: string = '';
-  @Input() activeCount: number = 0;
-  @Input() inactiveCount: number = 0;
+  @Input() Active: number = 0;
+  @Input() Inactive: number = 0;
   @Input() total: string = '';
   @Input() iconBackgroundColor: string = '';
 }

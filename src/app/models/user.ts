@@ -9,3 +9,5 @@ export interface IUser{
     profile_image?: string
     password:string
 }
+
+
